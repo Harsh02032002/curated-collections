@@ -40,15 +40,16 @@ export const Route = createFileRoute("/")({
 });
 
 const collections = [
-  { name: "Kurta", count: 124, image: kurtaImage, alt: "Full-length ivory embroidered kurta outfit" },
-  { name: "Dhoti", count: 48, image: dhotiImage, alt: "Complete ivory dhoti and angavastram styling" },
-  { name: "Saree", count: 320, image: sareeImage, alt: "Full-length crimson Banarasi saree drape" },
-  { name: "Blouse", count: 86, image: blouseImage, alt: "Complete embroidered crimson blouse on a mannequin" },
-  { name: "Sherwani", count: 72, image: sherwaniImage, alt: "Full-length ivory sherwani outfit" },
-  { name: "Veil", count: 54, image: veilImage, alt: "Complete crimson bridal veil with embroidered border" },
-  { name: "Juti", count: 66, image: jutiImage, alt: "Complete pair of embroidered ivory juttis" },
-  { name: "Angavastram", count: 39, image: angavastramImage, alt: "Full-length ivory silk angavastram with gold border" },
-];
+  { slug: "kurta", name: "Kurta", count: 124, image: kurtaImage, alt: "Full-length ivory embroidered kurta outfit" },
+  { slug: "dhoti", name: "Dhoti", count: 48, image: dhotiImage, alt: "Complete ivory dhoti and angavastram styling" },
+  { slug: "saree", name: "Saree", count: 320, image: sareeImage, alt: "Full-length crimson Banarasi saree drape" },
+  { slug: "blouse", name: "Blouse", count: 86, image: blouseImage, alt: "Complete embroidered crimson blouse on a mannequin" },
+  { slug: "sherwani", name: "Sherwani", count: 72, image: sherwaniImage, alt: "Full-length ivory sherwani outfit" },
+  { slug: "veil", name: "Veil", count: 54, image: veilImage, alt: "Complete crimson bridal veil with embroidered border" },
+  { slug: "juti", name: "Juti", count: 66, image: jutiImage, alt: "Complete pair of embroidered ivory juttis" },
+  { slug: "angavastram", name: "Angavastram", count: 39, image: angavastramImage, alt: "Full-length ivory silk angavastram with gold border" },
+] as const;
+
 
 function CataloguePage() {
   return (
@@ -113,25 +114,35 @@ function CataloguePage() {
         <section aria-label="Catalogue collections" className="grid grid-cols-2 gap-2 sm:gap-4 lg:grid-cols-4">
           {collections.map((collection) => (
             <article key={collection.name} className="group overflow-hidden rounded-md border border-border bg-card">
-              <div className="aspect-[3/4] overflow-hidden bg-image-surface sm:aspect-[4/5]">
-                <img
-                  src={collection.image}
-                  alt={collection.alt}
-                  width={1024}
-                  height={1280}
-                  loading="lazy"
-                  className="h-full w-full object-contain transition-transform duration-500 motion-safe:group-hover:scale-[1.015]"
-                />
-              </div>
-              <div className="px-2 pb-2 pt-1.5 sm:px-4 sm:pb-4 sm:pt-3">
-                <h2 className="font-display text-sm leading-tight sm:text-xl">{collection.name}</h2>
-                <p className="mt-0.5 text-[10px] text-muted-foreground sm:text-xs">{collection.count} catalogues</p>
-                <Button variant="link" className="mt-0.5 h-auto gap-1 p-0 text-[10px] font-normal text-collection-link no-underline hover:no-underline sm:mt-2 sm:gap-2 sm:text-sm">
-                  <span className="flex size-5 items-center justify-center rounded-full border border-gold sm:size-7"><ArrowRight aria-hidden="true" className="size-2.5 sm:size-3.5" /></span>
-                  View Collection
-                </Button>
-              </div>
+              <Link
+                to="/collections/$category"
+                params={{ category: collection.slug }}
+                aria-label={`View the ${collection.name} collection`}
+                className="block"
+              >
+                <div className="aspect-[3/4] overflow-hidden bg-image-surface sm:aspect-[4/5]">
+                  <img
+                    src={collection.image}
+                    alt={collection.alt}
+                    width={1024}
+                    height={1280}
+                    loading="lazy"
+                    className="h-full w-full object-contain transition-transform duration-500 motion-safe:group-hover:scale-[1.015]"
+                  />
+                </div>
+                <div className="px-2 pb-2 pt-1.5 sm:px-4 sm:pb-4 sm:pt-3">
+                  <h2 className="font-display text-sm leading-tight sm:text-xl">{collection.name}</h2>
+                  <p className="mt-0.5 text-[10px] text-muted-foreground sm:text-xs">{collection.count} catalogues</p>
+                  <Button asChild variant="link" className="mt-0.5 h-auto gap-1 p-0 text-[10px] font-normal text-collection-link no-underline hover:no-underline sm:mt-2 sm:gap-2 sm:text-sm">
+                    <span>
+                      <span className="flex size-5 items-center justify-center rounded-full border border-gold sm:size-7"><ArrowRight aria-hidden="true" className="size-2.5 sm:size-3.5" /></span>
+                      View Collection
+                    </span>
+                  </Button>
+                </div>
+              </Link>
             </article>
+
           ))}
         </section>
       </main>
