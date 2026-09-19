@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ChevronDown, Heart, Search, ShoppingBag, UserRound } from "lucide-react";
 
-import logoAsset from "@/assets/avishekk-naiya-logo.png.asset.json";
+import logoAsset from "@/assets/avishekk-naiya-logo.png";
 import { Button } from "@/components/ui/button";
 
 export function SiteHeader() {
@@ -15,7 +15,7 @@ export function SiteHeader() {
       </div>
       <div className="mx-auto flex h-14 max-w-[1440px] items-center justify-between px-5 sm:h-[68px] lg:px-14">
         <Link to="/" aria-label="AVISHEKK NAIYA home" className="flex min-w-0 items-center gap-2 sm:gap-3">
-          <img src={logoAsset.url} alt="" className="size-9 shrink-0 rounded-full object-contain sm:size-11" />
+          <img src={logoAsset} alt="" className="size-9 shrink-0 rounded-full object-contain sm:size-11" />
           <span className="truncate text-xs font-semibold tracking-[0.14em] sm:text-base">AVISHEKK NAIYA</span>
         </Link>
         <nav aria-label="Main navigation" className="hidden items-center gap-9 text-sm md:flex">
